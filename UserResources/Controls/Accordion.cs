@@ -44,6 +44,56 @@ namespace UniversalComputerInventory.UserResources.Controls
 			};
 		}
 
+		protected static Button CreateButtonElement(string text)
+		{
+			var btn=new Button()
+			{
+				Text=text,
+			};
+			btn.Clicked+=Btn_Clicked;
+		}
+
+		private static void Btn_Clicked(object? sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Expand()
+		{
+
+		}
+
+		private double GetContentHeight()
+		{
+			double height = 0;
+			foreach(var sel in Children)
+			{
+				double tmp=GetControlMaxTop(sel)
+			}
+		}
+
+		private static VSize GetControlYDepth(View control)
+		{
+			VSize parentPadding=GetParentPadding(control);
+			return new VSize(GetControlMaxLeft(control)+parentPadding.Width, GetControlMaxTop(control)+parentPadding.Height);
+		}
+
+		private static double GetControlMaxLeft(View control) => Max(control.Width, control.Bounds.Width) + control.Margin.Left + control.TranslationX;
+
+		private static double GetControlMaxTop(View control) => Max(control.Height, control.Bounds.Height) + control.Margin.Top + control.TranslationY;
+
+		private static VSize GetControlMargin(View control) => new (control.Margin.Left, control.Margin.Top);
+
+		private static VSize GetControlOffset(View control) => new (control.TranslationX, control.TranslationY);
+
+		private static double Max(double a, double b) => Math.Max(a, b);
+
+		private static VSize GetParentPadding(View control)
+		{
+			var parent=control.Parent;
+			return parent is Layout parentLayout ? new VSize(parentLayout.Padding.Left, parentLayout.Padding.Top) : new VSize(0, 0);
+		}
+
 		private void SetTitleLabel(Label? label)
 		{
 			if(label is not null)
