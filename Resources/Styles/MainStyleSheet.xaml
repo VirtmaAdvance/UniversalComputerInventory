@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+	<Style TargetType="BoxView" x:Key="BoxViewBackground">
+		<Setter Property="Color" Value="DimGray"/>
+		<Setter Property="CornerRadius" Value="10"/>
+		<Setter Property="VerticalOptions" Value="Center"/>
+		<Setter Property="HorizontalOptions" Value="Center"/>
+		<Setter Property="MinimumWidthRequest" Value="250"/>
+		<Setter Property="MinimumHeightRequest" Value="70"/>
+	</Style>
+
+	<Style TargetType="Entry" x:Key="NormalEntry">
+		<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+		<Setter Property="HorizontalTextAlignment" Value="Start" />
+		<Setter Property="Placeholder" Value="Computer Name" />
+		<Setter Property="WidthRequest" Value="250"/>
+		<Setter Property="TranslationY" Value="20"/>
+	</Style>
+
+	<Style TargetType="Label" x:Key="NormalLabel">
+		<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="HorizontalOptions" Value="Start" />
+		<Setter Property="HorizontalTextAlignment" Value="Start" />
+		<Setter Property="TranslationX" Value="20"/>
+	</Style>
+
+
+</ResourceDictionary>
