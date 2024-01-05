@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniversalComputerInventory.Services.Extensions.Enumerations;
 using UniversalComputerInventory.Services.Extensions.Objects;
 
 namespace UniversalComputerInventory.UserResources.Controls
@@ -10,7 +11,10 @@ namespace UniversalComputerInventory.UserResources.Controls
 	public class Accordion : AbsoluteLayout
 	{
 
-		private string _text;
+		private string _text="";
+		/// <summary>
+		/// The header text of this control.
+		/// </summary>
 		public string Text
 		{
 			get => _text;
@@ -20,16 +24,23 @@ namespace UniversalComputerInventory.UserResources.Controls
 				TitleLabel=CreateLabelElement(value);
 			}
 		}
-		private Label? _titleLabel;
+		private Button? _titleLabel;
 
-		public Label? TitleLabel
+		public Button? TitleLabel
 		{
 			get => _titleLabel;
 			protected set => SetTitleLabel(value);
 		}
+		/// <summary>
+		/// Indicates if this control is in it's expanded or collapsed visual state.
+		/// </summary>
+		public bool IsExpanded { get; private set; } = false;
 
 
-
+		/// <summary>
+		/// Creates a new instance of the <see cref="Accordion"/> control.
+		/// </summary>
+		/// <param name="text"></param>
 		public Accordion(string text)
 		{
 			Text=text;
@@ -51,6 +62,7 @@ namespace UniversalComputerInventory.UserResources.Controls
 				Text=text,
 			};
 			btn.Clicked+=Btn_Clicked;
+			return btn;
 		}
 
 		private static void Btn_Clicked(object? sender, EventArgs e)
@@ -62,14 +74,17 @@ namespace UniversalComputerInventory.UserResources.Controls
 		{
 
 		}
-
-		private double GetContentHeight()
+		/// <summary>
+		/// Determines the inner content height this control should be set to.
+		/// </summary>
+		/// <returns></returns>
+		private double GetInnerHeight()
 		{
-			double height = 0;
-			foreach(var sel in Children)
-			{
-				double tmp=GetControlMaxTop(sel)
-			}
+			return Children.Cast<View>().IterateMathDouble((control, height) => Math.Max(height, GetControlMaxTop(control)));
+			//double height = 0;
+			//foreach(var sel in Children.Cast<View>())
+			//	height=Math.Max(height, GetControlMaxTop(sel));
+			//return height;
 		}
 
 		private static VSize GetControlYDepth(View control)
